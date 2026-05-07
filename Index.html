@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBS Lead Generator — You Only Pay for Leads</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1F3D;
+    --navy-mid: #0E3460;
+    --navy-light: #1A4F8A;
+    --orange: #2B7FE0;
+    --orange-light: #4A97ED;
+    --cream: #F0F5FC;
+    --cream-mid: #E0EAF8;
+    --white: #FFFFFF;
+    --text-dark: #0A1F3D;
+    --text-mid: #3A5070;
+    --text-light: #6080A0;
+    --border: rgba(10,31,61,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 18px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-cta {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--navy-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 5vw 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(43,127,224,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(43,127,224,0.1);
+    color: var(--orange);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--orange);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    height: 3px;
+    background: var(--orange);
+    opacity: 0.3;
+    border-radius: 2px;
+  }
+  .hero-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px; font-weight: 500;
+    padding: 14px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--navy-mid);
+    font-size: 15px; font-weight: 400;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    border: none; background: none; cursor: pointer;
+  }
+  .btn-ghost:hover { color: var(--orange); }
+  .hero-trust {
+    margin-top: 48px;
+    display: flex; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-light);
+  }
+  .trust-icon {
+    width: 18px; height: 18px;
+    background: rgba(232,82,26,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    color: var(--orange);
+  }
+
+  /* ── CALCULATOR CARD ── */
+  .calc-card {
+    background: var(--white);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 36px;
+    box-shadow: 0 24px 80px rgba(15,39,68,0.12);
+    position: relative;
+  }
+  .calc-card::before {
+    content: 'FREE CALCULATOR';
+    position: absolute; top: -12px; left: 28px;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+  .calc-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .calc-sub { font-size: 13px; color: var(--text-light); margin-bottom: 24px; }
+  .calc-field { margin-bottom: 16px; }
+  .calc-field label {
+    display: block;
+    font-size: 12px; font-weight: 500;
+    color: var(--text-mid);
+    margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .calc-field select,
+  .calc-field input[type="number"],
+  .calc-field input[type="email"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: var(--cream);
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .calc-field select:focus,
+  .calc-field input:focus { border-color: var(--orange); }
+  .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .slider-wrap { display: flex; align-items: center; gap: 10px; }
+  .slider-wrap input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: var(--cream-mid);
+    border-radius: 2px;
+    outline: none;
+  }
+  .slider-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--orange);
+    cursor: pointer;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 1px var(--orange);
+  }
+  .slider-num {
+    font-size: 14px; font-weight: 500;
+    min-width: 38px; text-align: right;
+    color: var(--navy);
+  }
+  .results-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin: 20px 0 16px;
+  }
+  .result-box {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+  }
+  .result-box.highlight {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .result-label {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  .result-box.highlight .result-label { color: rgba(255,255,255,0.6); }
+  .result-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 22px;
+    color: var(--navy);
+  }
+  .result-box.highlight .result-value { color: var(--white); }
+  .roi-section { margin-bottom: 16px; }
+  .roi-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .roi-top span:first-child { font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-light); }
+  .roi-pct { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--orange); }
+  .roi-track { height: 6px; background: var(--cream-mid); border-radius: 3px; overflow: hidden; }
+  .roi-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--orange-light)); border-radius: 3px; transition: width 0.4s ease; }
+  .verdict-text {
+    font-size: 13px; line-height: 1.6;
+    color: var(--text-mid);
+    background: rgba(232,82,26,0.06);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+  .verdict-text strong { color: var(--navy); }
+  .email-capture { display: flex; gap: 8px; margin-bottom: 8px; }
+  .email-capture input {
+    flex: 1;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: var(--cream);
+    color: var(--text-dark);
+    outline: none;
+  }
+  .email-capture input:focus { border-color: var(--orange); }
+  .email-capture button {
+    background: var(--orange);
+    color: var(--white);
+    border: none; cursor: pointer;
+    padding: 0 18px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .email-capture button:hover { background: var(--orange-light); }
+  .email-note { font-size: 11px; color: var(--text-light); text-align: center; }
+  .success-msg {
+    font-size: 13px; color: #15803d;
+    background: #f0fdf4; border: 1px solid #bbf7d0;
+    border-radius: 6px; padding: 10px 14px;
+    display: none; margin-bottom: 8px;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 5vw; }
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .section-h {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .section-p {
+    font-size: 17px; font-weight: 300; line-height: 1.7;
+    color: var(--text-mid);
+    max-width: 540px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--navy); }
+  .how .section-tag { color: rgba(232,82,26,0.9); }
+  .how .section-h { color: var(--white); }
+  .how .section-p { color: rgba(255,255,255,0.6); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .step {
+    background: rgba(255,255,255,0.04);
+    padding: 36px 28px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s;
+    position: relative;
+  }
+  .step:hover { background: rgba(255,255,255,0.07); }
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 48px;
+    color: rgba(232,82,26,0.25);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 16px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .step-desc { font-size: 14px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.55); }
+
+  /* ── WHY OBS ── */
+  .why { background: var(--cream); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 60px;
+  }
+  .why-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .why-card:hover { box-shadow: 0 12px 40px rgba(15,39,68,0.1); transform: translateY(-2px); }
+  .why-icon {
+    width: 42px; height: 42px;
+    background: rgba(43,127,224,0.1);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+  .why-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 16px;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .why-desc { font-size: 14px; line-height: 1.65; color: var(--text-mid); font-weight: 300; }
+
+  /* ── PRICING STRIP ── */
+  .pricing { background: var(--cream-mid); }
+  .pricing-table-wrap { overflow-x: auto; margin-top: 48px; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--navy);
+    color: rgba(255,255,255,0.85);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600; font-size: 13px;
+    padding: 14px 20px;
+    text-align: left;
+  }
+  thead th:first-child { border-radius: 10px 0 0 0; }
+  thead th:last-child { border-radius: 0 10px 0 0; }
+  tbody tr:nth-child(odd) td { background: var(--white); }
+  tbody tr:nth-child(even) td { background: var(--cream); }
+  tbody td {
+    padding: 14px 20px;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td:first-child { font-weight: 500; }
+  .price-starter { color: var(--orange); font-weight: 600; }
+  .price-note { font-size: 12px; color: var(--text-light); margin-top: 12px; }
+
+  /* ── FAQ ── */
+  .faq { background: var(--cream); }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 26px;
+  }
+  .faq-q {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 15px;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .faq-a { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--text-mid); }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--navy);
+    text-align: center;
+    padding: 120px 5vw;
+    position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(43,127,224,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .final-cta h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: -0.03em; line-height: 1.1;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .final-cta h2 span { color: var(--orange); }
+  .final-cta p { font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+  .cta-form {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; max-width: 520px; margin: 0 auto 16px;
+  }
+  .cta-form input {
+    flex: 1; min-width: 200px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; outline: none;
+  }
+  .cta-form input::placeholder { color: rgba(255,255,255,0.35); }
+  .cta-form input:focus { border-color: var(--orange); }
+  .cta-form button {
+    background: var(--orange);
+    color: var(--white);
+    border: none; cursor: pointer;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .cta-form button:hover { background: var(--orange-light); }
+  .cta-note { font-size: 13px; color: rgba(255,255,255,0.35); }
+  .cta-success {
+    font-size: 15px; color: #86efac;
+    background: rgba(134,239,172,0.1);
+    border: 1px solid rgba(134,239,172,0.2);
+    border-radius: 8px; padding: 12px 24px;
+    display: none; margin: 0 auto 16px; max-width: 400px;
+  }
+
+  /* ── SQUARESPACE PLACEHOLDER BOXES ── */
+  .sq-placeholder {
+    border: 2px dashed var(--orange);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background: rgba(43,127,224,0.04);
+    margin-bottom: 10px;
+  }
+  .sq-placeholder-dark {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
+    margin: 0 auto 20px;
+    max-width: 520px;
+  }
+  .sq-icon { font-size: 22px; margin-bottom: 6px; }
+  .sq-label { font-size: 14px; font-weight: 500; color: var(--orange); margin-bottom: 4px; }
+  .sq-placeholder-dark .sq-label { color: rgba(255,255,255,0.7); }
+  .sq-hint { font-size: 12px; color: var(--text-light); }
+  .sq-placeholder-dark .sq-hint { color: rgba(255,255,255,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 16px; color: var(--white);
+  }
+  .footer-logo span { color: var(--orange); }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-actions { animation-delay: 0.4s; }
+  .hero-trust { animation-delay: 0.5s; }
+  .calc-card {
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s ease forwards;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; }
+    .calc-card { margin-top: 20px; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .calc-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">OB Lead Generator</div>
+  <a href="#get-started" class="nav-cta">Get started free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Performance-based lead generation</div>
+    <h1>You only pay<br>for <em>real leads</em>.</h1>
+    <p class="hero-sub">OBS runs your paid ad campaigns, funds the spend, and delivers qualified leads directly to you. No retainers. No guesswork. Pay per lead, nothing else.</p>
+    <div class="hero-actions">
+      <a href="#get-started" class="btn-primary">Calculate my ROI</a>
+      <a href="#how" class="btn-ghost">See how it works →</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><div class="trust-icon">✓</div> No upfront cost</div>
+      <div class="trust-item"><div class="trust-icon">✓</div> We fund the ads</div>
+      <div class="trust-item"><div class="trust-icon">✓</div> Month-to-month</div>
+    </div>
+  </div>
+
+  <!-- EMBEDDED CALCULATOR -->
+  <div class="calc-card" id="get-started">
+    <div class="calc-title">Lead cost calculator</div>
+    <div class="calc-sub">See your projected ROI in under 60 seconds.</div>
+
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>Industry</label>
+        <select id="c-industry" onchange="calcROI()">
+          <option value="local">Local services</option>
+          <option value="restaurant">Restaurants</option>
+          <option value="health">Health &amp; wellness</option>
+          <option value="realestate">Real estate</option>
+          <option value="online">Products — online</option>
+          <option value="offline">Products — offline</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Lead tier</label>
+        <select id="c-tier" onchange="calcROI()">
+          <option value="starter">Starter</option>
+          <option value="growth" selected>Growth</option>
+          <option value="premium">Premium</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calc-field">
+      <label>Monthly leads wanted</label>
+      <div class="slider-wrap">
+        <input type="range" id="c-leads" min="10" max="200" step="5" value="30" oninput="syncL(this.value)">
+        <span class="slider-num" id="c-leads-out">30</span>
+      </div>
+    </div>
+
+    <div class="calc-field">
+      <label>Your close rate</label>
+      <div class="slider-wrap">
+        <input type="range" id="c-close" min="5" max="80" step="5" value="20" oninput="syncC(this.value)">
+        <span class="slider-num" id="c-close-out">20%</span>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>Avg. customer value (R)</label>
+        <input type="number" id="c-val" value="2500" min="100" step="100" oninput="calcROI()">
+      </div>
+      <div class="calc-field">
+        <label>Repeat purchases/yr</label>
+        <input type="number" id="c-rep" value="1" min="1" max="52" step="1" oninput="calcROI()">
+      </div>
+    </div>
+
+    <div class="results-row">
+      <div class="result-box">
+        <div class="result-label">Cost per lead</div>
+        <div class="result-value" id="r-cpl">R220</div>
+      </div>
+      <div class="result-box">
+        <div class="result-label">Monthly spend</div>
+        <div class="result-value" id="r-spend">R6,600</div>
+      </div>
+      <div class="result-box">
+        <div class="result-label">New customers</div>
+        <div class="result-value" id="r-cust">6</div>
+      </div>
+      <div class="result-box highlight">
+        <div class="result-label">Monthly revenue</div>
+        <div class="result-value" id="r-rev">R15,000</div>
+      </div>
+    </div>
+
+    <div class="roi-section">
+      <div class="roi-top">
+        <span>Return on investment</span>
+        <span class="roi-pct" id="r-roi">127%</span>
+      </div>
+      <div class="roi-track"><div class="roi-fill" id="r-bar" style="width:50%"></div></div>
+    </div>
+
+    <div class="verdict-text" id="r-verdict">
+      For every <strong>R1</strong> spent, you could earn back <strong>R2.27</strong>. At 30 leads/month you're projected to gain <strong>6 customers</strong> generating <strong>R15,000</strong> against a spend of <strong>R6,600</strong>.
+    </div>
+
+    <div id="c-success" class="success-msg">✓ Submitted! Check your inbox for your ROI report.</div>
+    <form id="report-form"
+          action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+          method="POST"
+          onsubmit="submitReport(event)">
+      <input type="hidden" name="Subject" value="OB Lead Generator — ROI Report Request">
+      <input type="hidden" name="roi_summary" id="roi-summary-field" value="">
+      <div class="email-capture">
+        <input type="email" name="email" id="c-email" placeholder="Enter your email for full report" required>
+        <button type="submit">Send report</button>
+      </div>
+    </form>
+    <div class="email-note">No spam. We'll email your personalised ROI breakdown.</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-tag">The process</div>
+  <h2 class="section-h">Simple. Transparent.<br>Performance-driven.</h2>
+  <p class="section-p">Five steps from sign-up to your first lead. We handle everything in between.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><div class="step-title">Discovery call</div><div class="step-desc">30 minutes. We learn your business, ideal customer, and goals.</div></div>
+    <div class="step"><div class="step-num">02</div><div class="step-title">Campaign build</div><div class="step-desc">OBS designs and launches targeted paid ads. Fully handled.</div></div>
+    <div class="step"><div class="step-num">03</div><div class="step-title">Leads delivered</div><div class="step-desc">Qualified contacts sent in real time via email, SMS, or CRM.</div></div>
+    <div class="step"><div class="step-num">04</div><div class="step-title">Pay per lead</div><div class="step-desc">No retainers. No wasted budget. You pay only for leads received.</div></div>
+    <div class="step"><div class="step-num">05</div><div class="step-title">Review &amp; scale</div><div class="step-desc">Monthly reports. Scale up what works, cut what doesn't.</div></div>
+  </div>
+</section>
+
+<!-- WHY OBS -->
+<section class="why">
+  <div class="section-tag">Why OBS</div>
+  <h2 class="section-h">Built different.</h2>
+  <p class="section-p">Traditional agencies charge you whether leads come in or not. We don't.</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">💰</div><div class="why-title">Zero upfront cost</div><div class="why-desc">Pay nothing until leads start arriving. No retainer, no setup fee.</div></div>
+    <div class="why-card"><div class="why-icon">📣</div><div class="why-title">We fund the ads</div><div class="why-desc">OBS covers all ad spend across Facebook, Instagram, Google, and TikTok.</div></div>
+    <div class="why-card"><div class="why-icon">🎯</div><div class="why-title">Industry targeting</div><div class="why-desc">Campaigns built for your exact customer profile — not generic traffic.</div></div>
+    <div class="why-card"><div class="why-icon">📊</div><div class="why-title">Transparent reporting</div><div class="why-desc">See every lead, its source, and cost. No black boxes, ever.</div></div>
+    <div class="why-card"><div class="why-icon">🔧</div><div class="why-title">Flexible volume</div><div class="why-desc">Set your monthly lead cap. Start small and scale as you grow.</div></div>
+    <div class="why-card"><div class="why-icon">📅</div><div class="why-title">No long contracts</div><div class="why-desc">Month-to-month agreements. Stop or pause any time you like.</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="section-tag">Pricing</div>
+  <h2 class="section-h">One price.<br>Per lead.</h2>
+  <p class="section-p">All ad spend and campaign management included. No hidden fees.</p>
+  <div class="pricing-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Industry</th>
+          <th>Starter (R/lead)</th>
+          <th>Growth (R/lead)</th>
+          <th>Premium (R/lead)</th>
+          <th>Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Local services</td><td class="price-starter">R150</td><td>R220</td><td>R350</td><td>Custom</td></tr>
+        <tr><td>Restaurants &amp; food</td><td class="price-starter">R150</td><td>R200</td><td>—</td><td>Custom</td></tr>
+        <tr><td>Health &amp; wellness</td><td class="price-starter">R200</td><td>R320</td><td>R450</td><td>Custom</td></tr>
+        <tr><td>Real estate</td><td class="price-starter">R250</td><td>R400</td><td>R600</td><td>Custom</td></tr>
+        <tr><td>Products — online</td><td class="price-starter">R180</td><td>R280</td><td>R400</td><td>Custom</td></tr>
+        <tr><td>Products — offline</td><td class="price-starter">R150</td><td>R250</td><td>R380</td><td>Custom</td></tr>
+      </tbody>
+    </table>
+    <p class="price-note">All prices exclude VAT. Minimum 10 leads/month. Volume discounts from 50+ leads/month. Invalid or duplicate leads are not charged.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-tag">FAQs</div>
+  <h2 class="section-h">Questions answered.</h2>
+  <div class="faq-grid">
+    <div class="faq-item"><div class="faq-q">Do I need to sign a long contract?</div><div class="faq-a">No. Our agreements are month-to-month. Pause or stop any time.</div></div>
+    <div class="faq-item"><div class="faq-q">What counts as a lead?</div><div class="faq-a">A verified contact with name, phone or email, and stated intent to buy or enquire.</div></div>
+    <div class="faq-item"><div class="faq-q">What if I get a bad lead?</div><div class="faq-a">We have a lead quality guarantee. Duplicates or invalid contacts are not charged.</div></div>
+    <div class="faq-item"><div class="faq-q">How do leads reach me?</div><div class="faq-a">By email, SMS, WhatsApp, or direct CRM integration — whichever you prefer.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I control the volume?</div><div class="faq-a">Yes. You set a monthly lead cap. We never exceed it without your approval.</div></div>
+    <div class="faq-item"><div class="faq-q">Which ad platforms do you use?</div><div class="faq-a">Facebook, Instagram, Google Ads, and TikTok depending on your industry and audience.</div></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Ready to get your<br>first <span>leads</span>?</h2>
+  <p>Join businesses across South Africa growing with pay-per-lead.</p>
+  <div id="cta-success" class="cta-success">✓ We've got your details. Expect a call within 1 business day.</div>
+  <form class="cta-form"
+        action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+        method="POST"
+        onsubmit="ctaSubmit(event)">
+    <input type="hidden" name="Subject" value="OB Lead Generator — Discovery Call Booking">
+    <input type="text"  name="name"  id="cta-name"  placeholder="Your name"     required>
+    <input type="tel"   name="phone" id="cta-phone" placeholder="Phone number"  required>
+    <input type="email" name="email" id="cta-email" placeholder="Email address" required>
+    <button type="submit">Book discovery call</button>
+  </form>
+  <p class="cta-note">Free 30-minute call. No obligation. South Africa only.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">OB Lead Generator</div>
+  <div class="footer-links">
+    <a href="#">info@obsleads.co.za</a>
+    <a href="#">+27 (0) 00 000 0000</a>
+    <a href="#">obsleadgenerator.co.za</a>
+  </div>
+  <div class="footer-copy">© 2026 OBS Lead Generator. All rights reserved.</div>
+</footer>
+
+<script>
+const pricing = {
+  local:      { starter: 150, growth: 220, premium: 350 },
+  restaurant: { starter: 150, growth: 200, premium: 200 },
+  health:     { starter: 200, growth: 320, premium: 450 },
+  realestate: { starter: 250, growth: 400, premium: 600 },
+  online:     { starter: 180, growth: 280, premium: 400 },
+  offline:    { starter: 150, growth: 250, premium: 380 },
+};
+
+function fmt(n) { return 'R' + Math.round(n).toLocaleString('en-ZA'); }
+
+function calcROI() {
+  const ind   = document.getElementById('c-industry').value;
+  const tier  = document.getElementById('c-tier').value;
+  const leads = parseInt(document.getElementById('c-leads').value);
+  const close = parseInt(document.getElementById('c-close').value) / 100;
+  const val   = parseFloat(document.getElementById('c-val').value) || 0;
+  const rep   = parseFloat(document.getElementById('c-rep').value) || 1;
+
+  const cpl      = pricing[ind][tier];
+  const spend    = cpl * leads;
+  const cust     = Math.round(leads * close);
+  const revenue  = cust * val * rep;
+  const roi      = spend > 0 ? ((revenue - spend) / spend) * 100 : 0;
+  const roiRatio = spend > 0 ? (revenue / spend) : 0;
+
+  document.getElementById('r-cpl').textContent   = fmt(cpl);
+  document.getElementById('r-spend').textContent = fmt(spend);
+  document.getElementById('r-cust').textContent  = cust;
+  document.getElementById('r-rev').textContent   = fmt(revenue);
+  document.getElementById('r-roi').textContent   = Math.round(roi) + '%';
+
+  const barW = Math.min(100, Math.max(2, roi / 5));
+  document.getElementById('r-bar').style.width = barW + '%';
+
+  document.getElementById('r-verdict').innerHTML =
+    'For every <strong>R1</strong> spent, you could earn back <strong>' + fmt(roiRatio) + '</strong>. At ' + leads + ' leads/month you\'re projected to gain <strong>' + cust + ' customer' + (cust !== 1 ? 's' : '') + '</strong> generating <strong>' + fmt(revenue) + '</strong> against a spend of <strong>' + fmt(spend) + '</strong>.';
+}
+
+function syncL(v) { document.getElementById('c-leads-out').textContent = v; calcROI(); }
+function syncC(v) { document.getElementById('c-close-out').textContent = v + '%'; calcROI(); }
+
+function submitReport(e) {
+  const roi   = document.getElementById('r-roi').textContent;
+  const spend = document.getElementById('r-spend').textContent;
+  const rev   = document.getElementById('r-rev').textContent;
+  const cpl   = document.getElementById('r-cpl').textContent;
+  const cust  = document.getElementById('r-cust').textContent;
+  document.getElementById('roi-summary-field').value =
+    'Cost per lead: ' + cpl + ' | Monthly spend: ' + spend + ' | New customers: ' + cust + ' | Revenue: ' + rev + ' | ROI: ' + roi;
+  document.getElementById('c-success').style.display = 'block';
+  setTimeout(() => { document.getElementById('c-success').style.display = 'none'; }, 6000);
+}
+
+function ctaSubmit(e) {
+  document.getElementById('cta-success').style.display = 'block';
+}
+
+calcROI();
+</script>
+</body>
+</html>
